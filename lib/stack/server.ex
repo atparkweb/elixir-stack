@@ -8,7 +8,8 @@ defmodule Stack.Server do
   ####
   # External API
   def start_link(list) do
-    GenServer.start_link(__MODULE__, list, name: __MODULE__)
+    { :ok, pid } = GenServer.start_link(__MODULE__, list, name: __MODULE__)
+    :global.register_name(:stack_server, pid)
   end
   
   def pop do
