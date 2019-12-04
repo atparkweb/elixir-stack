@@ -8,8 +8,7 @@ defmodule Stack.Server do
   ####
   # External API
   def start_link(list) do
-    { :ok, pid } = GenServer.start_link(__MODULE__, list, name: __MODULE__)
-    :global.register_name(:stack_server, pid)
+    GenServer.start_link(__MODULE__, list, name: __MODULE__)
   end
   
   def pop do
@@ -28,5 +27,9 @@ defmodule Stack.Server do
   
   def handle_cast({ :push, value }, list) do
     { :noreply, [value|list]}
+  end
+  
+  def terminate(reason, list) do
+    IO.puts "Server process will terminate. Reason: #{inspect reason}, State: #{inspect list}"
   end
 end
