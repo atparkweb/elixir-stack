@@ -1,6 +1,6 @@
 # Stack
 
-**TODO: Add description**
+A simple stack implemented as an Elixir OTP application
 
 ## Installation
 
